@@ -1,0 +1,209 @@
+body, #mainWrapper {
+	height: 70%;
+	background-color:rgb(245, 245, 245);
+}
+
+body, .form-control{
+	font-size:12px!important;
+}
+
+.floatRight{
+	float:right;
+	margin-right: 18px;
+}
+
+.has-error{
+	color:red;
+}
+
+.formcontainer{
+	background-color: #DAE8E8;
+	padding: 20px;
+}
+
+.tablecontainer{
+	padding-left: 20px;
+}
+
+.generic-container {
+  width:98%;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #EAE7E7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 30px black;
+}
+
+.custom-width {
+    width: 80px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* from top left corner */
+* {margin: 0; padding: 0;}
+
+
+
+
+/* element in the tree */
+.tree li a{
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	text-decoration: none;
+	font-family: arial, verdana, tahoma;
+	font-size: 11px;
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+	
+	/* slow pop up on hover */
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+/* ok, but works only for Example5, Example3 fails */
+ul li.lastChild {
+	float:none;
+}
+
+
+
+.tree ul {
+	padding-top: 20px; position: relative;
+
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.tree li {
+	float: left; 
+	text-align: center;
+	list-style-type: none;
+	position: relative;
+	padding: 20px 5px 0 5px;
+
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+/*We will use ::before and ::after to draw the connectors*/
+
+.tree li::before, .tree li::after{
+	content: '';
+	position: absolute; 
+	top: 0; 
+	right: 50%;
+	border-top: 1px solid #ccc;
+	width: 50%; 
+	height: 45px;
+	z-index: -1;
+}
+.tree li::after{
+	right: auto; left: 50%;
+	border-left: 1px solid #ccc;
+}
+
+/*We need to remove left-right connectors from elements without 
+any siblings*/
+.tree li:only-child::after, .tree li:only-child::before {
+	display: none;
+}
+
+/*Remove space from the top of single children*/
+.tree li:only-child{ 
+	padding-top: 0;
+}
+
+/*Remove left connector from first child and 
+right connector from last child*/
+.tree li:first-child::before, .tree li:last-child::after{
+	border: 0 none;
+}
+
+/*Adding back the vertical connector to the last nodes*/
+.tree li:last-child::before{
+	border-right: 1px solid #ccc;
+	border-radius: 0 5px 0 0;
+	
+	-webkit-transform: translateX(1px);
+	-moz-transform: translateX(1px);
+	transform: translateX(1px);
+	
+	-webkit-border-radius: 0 5px 0 0;
+	-moz-border-radius: 0 5px 0 0;
+	border-radius: 0 5px 0 0;
+}
+.tree li:first-child::after{
+	border-radius: 5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+}
+
+/*Time to add downward connectors from parents*/
+.tree ul ul::before{
+	content: '';
+	position: absolute; 
+	top: -12px; 
+	left: 50%;
+	border-left: 1px solid #ccc;
+	width: 0; 
+	height: 32px;
+	z-index: -1;
+}
+
+/* partners */
+.tree li a+a {
+	margin-left: 20px;
+	position: relative;
+}
+/* connect partners */
+.tree li a+a::before {
+	content: '';
+	position: absolute;
+	border-top: 1px solid #ccc;
+	top: 50%; 
+	left: -21px; 
+	width: 20px;
+}
+
+/*We will apply the hover effect the the lineage of the element also*/
+.tree li a:hover/*, .tree li a:hover~ul li a */{
+	/*
+	background: #e35e5e; 
+	color: #000; 
+	*/
+	border: 3px solid #ea3737;
+}
+/*Connector styles on hover*/
+.tree li a:hover~ul li::after, 
+.tree li a:hover~ul li::before, 
+.tree li a:hover~ul::before, 
+.tree li a:hover~ul ul::before
+{
+	border-color: #94a0b4;
+}
+
+.father {
+	margin-left: 90px;
+}
